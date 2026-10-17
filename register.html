@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register | SkillSet India</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a class="logo" href="index.html">🇮🇳 SkillSet India</a>
+
+  <nav>
+    <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+    <a href="jobs.html" data-en="Find Work" data-hi="काम खोजें">Find Work</a>
+    <a href="hire.html" data-en="Hire Talent" data-hi="टैलेंट हायर करें">Hire Talent</a>
+    <a href="skills.html" data-en="Skill Exchange" data-hi="स्किल एक्सचेंज">Skill Exchange</a>
+    <a href="learn.html" data-en="Learn & Earn" data-hi="सीखें और कमाएँ">Learn & Earn</a>
+    <a href="wallet.html" data-en="Wallet" data-hi="वॉलेट">Wallet</a>
+    <a href="register.html" data-en="Register" data-hi="रजिस्टर करें">Register</a>
+  </nav>
+
+  <select id="languageSelect" aria-label="Select language">
+    <option value="en">English</option>
+    <option value="hi">हिंदी</option>
+  </select>
+</header>
+
+<main class="container">
+
+  <section class="page-title">
+    <span class="badge"
+      data-en="Join Our Community"
+      data-hi="हमारे समुदाय से जुड़ें">Join Our Community</span>
+
+    <h1 data-en="Create Your Profile" data-hi="अपनी प्रोफ़ाइल बनाएँ">
+      Create Your Profile
+    </h1>
+
+    <p
+      data-en="Fill in your details. Email is optional."
+      data-hi="अपनी जानकारी भरें। ईमेल देना वैकल्पिक है।">
+      Fill in your details. Email is optional.
+    </p>
+  </section>
+
+  <form class="card" id="registerForm">
+    <div class="form-grid">
+
+      <div class="field">
+        <label for="fullName" data-en="Full Name *" data-hi="पूरा नाम *">Full Name *</label>
+        <input id="fullName" name="fullName" required
+          placeholder="Your full name"
+          data-placeholder-en="Your full name"
+          data-placeholder-hi="अपना पूरा नाम लिखें">
+      </div>
+
+      <div class="field">
+        <label for="role" data-en="Join As *" data-hi="किस रूप में जुड़ें *">Join As *</label>
+        <select id="role" name="role" required>
+          <option value="Worker" data-en="Worker" data-hi="कामगार">Worker</option>
+          <option value="Employer" data-en="Employer" data-hi="नियोक्ता">Employer</option>
+          <option value="Freelancer" data-en="Freelancer" data-hi="फ्रीलांसर">Freelancer</option>
+          <option value="Learner" data-en="Learner" data-hi="सीखने वाला">Learner</option>
+          <option value="Teacher" data-en="Teacher" data-hi="शिक्षक">Teacher</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="email" data-en="Email Address (Optional)" data-hi="ईमेल पता (वैकल्पिक)">Email Address (Optional)</label>
+        <input id="email" name="email" type="email"
+          placeholder="you@example.com"
+          data-placeholder-en="you@example.com"
+          data-placeholder-hi="you@example.com">
+      </div>
+
+      <div class="field">
+        <label for="mobile" data-en="Mobile Number *" data-hi="मोबाइल नंबर *">Mobile Number *</label>
+        <input id="mobile" name="mobile" type="tel"
+          inputmode="numeric" maxlength="10" pattern="[0-9]{10}"
+          required placeholder="10-digit number"
+          data-placeholder-en="10-digit number"
+          data-placeholder-hi="10 अंकों का नंबर">
+      </div>
+
+      <div class="field">
+        <label for="city" data-en="City *" data-hi="शहर *">City *</label>
+        <input id="city" name="city" required
+          placeholder="Your city"
+          data-placeholder-en="Your city"
+          data-placeholder-hi="अपने शहर का नाम लिखें">
+      </div>
+
+      <div class="field">
+        <label for="skill" data-en="Main Skill *" data-hi="मुख्य कौशल *">Main Skill *</label>
+
+        <select id="skill" name="skill" required>
+          <option value="" data-en="Select skill" data-hi="कौशल चुनें">Select skill</option>
+          <option value="Electrician" data-en="Electrician" data-hi="इलेक्ट्रीशियन">Electrician</option>
+          <option value="Plumber" data-en="Plumber" data-hi="प्लंबर">Plumber</option>
+          <option value="Carpenter" data-en="Carpenter" data-hi="बढ़ई">Carpenter</option>
+          <option value="Labourer" data-en="Labourer" data-hi="मजदूर">Labourer</option>
+          <option value="Cook" data-en="Cook" data-hi="रसोइया">Cook</option>
+          <option value="Driver" data-en="Driver" data-hi="ड्राइवर">Driver</option>
+          <option value="Tailor" data-en="Tailor" data-hi="दर्जी">Tailor</option>
+          <option value="Graphic Designer" data-en="Graphic Designer" data-hi="ग्राफिक डिज़ाइनर">Graphic Designer</option>
+          <option value="Web Developer" data-en="Web Developer" data-hi="वेब डेवलपर">Web Developer</option>
+          <option value="Teacher / Tutor" data-en="Teacher / Tutor" data-hi="शिक्षक / ट्यूटर">Teacher / Tutor</option>
+          <option value="Beauty Professional" data-en="Beauty Professional" data-hi="ब्यूटी प्रोफेशनल">Beauty Professional</option>
+          <option value="Entrepreneur / Business Owner" data-en="Entrepreneur / Business Owner" data-hi="उद्यमी / व्यवसाय के मालिक">Entrepreneur / Business Owner</option>
+          <option value="Other" data-en="Other" data-hi="अन्य">Other</option>
+        </select>
+      </div>
+
+      <div class="field hidden" id="otherSkillWrap">
+        <label for="otherSkill" data-en="Enter Your Skill *" data-hi="अपना कौशल लिखें *">Enter Your Skill *</label>
+        <input id="otherSkill" name="otherSkill"
+          placeholder="Type your skill"
+          data-placeholder-en="Type your skill"
+          data-placeholder-hi="अपना कौशल लिखें">
+      </div>
+
+      <div class="field">
+        <label for="experience" data-en="Experience" data-hi="अनुभव">Experience</label>
+        <select id="experience" name="experience">
+          <option value="Beginner" data-en="Beginner" data-hi="शुरुआती">Beginner</option>
+          <option value="Less than 1 year" data-en="Less than 1 year" data-hi="1 साल से कम">Less than 1 year</option>
+          <option value="1–3 years" data-en="1–3 years" data-hi="1–3 साल">1–3 years</option>
+          <option value="3–5 years" data-en="3–5 years" data-hi="3–5 साल">3–5 years</option>
+          <option value="5+ years" data-en="5+ years" data-hi="5+ साल">5+ years</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <button class="btn" type="submit"
+          data-en="Save Demo Profile"
+          data-hi="डेमो प्रोफ़ाइल सेव करें">
+          Save Demo Profile
+        </button>
+
+        <p
+          data-en="Fields marked * are required. Email can be left blank."
+          data-hi="* वाले फ़ील्ड भरना ज़रूरी है। ईमेल खाली छोड़ सकते हैं।">
+          Fields marked * are required. Email can be left blank.
+        </p>
+
+        <p id="registerMessage" role="status" aria-live="polite"></p>
+      </div>
+
+    </div>
+  </form>
+
+  <div class="notice"
+    data-en="Demo only: profile details are saved in this browser. Secure login and a shared database are not connected."
+    data-hi="यह केवल डेमो है: प्रोफ़ाइल की जानकारी इसी ब्राउज़र में सेव होती है। सुरक्षित लॉगिन और साझा डेटाबेस अभी कनेक्ट नहीं हैं।">
+    Demo only: profile details are saved in this browser. Secure login and a shared database are not connected.
+  </div>
+
+</main>
+
+<footer>© 2026 SkillSet India | Team INNOVEXA</footer>
+
+<script src="script.js"></script>
+
+<script>
+(() => {
+  const languageSelect = document.getElementById("languageSelect");
+  const form = document.getElementById("registerForm");
+  const skillSelect = document.getElementById("skill");
+  const otherSkillWrap = document.getElementById("otherSkillWrap");
+  const otherSkillInput = document.getElementById("otherSkill");
+  const message = document.getElementById("registerMessage");
+
+  const languageKey = "skillset_language";
+  let language = localStorage.getItem(languageKey) || "en";
+
+  function translatePage(lang) {
+    language = lang === "hi" ? "hi" : "en";
+    document.documentElement.lang = language;
+    languageSelect.value = language;
+
+    document.querySelectorAll("[data-en][data-hi]").forEach(element => {
+      if (element.tagName !== "OPTION") {
+        element.textContent = element.dataset[language];
+      } else {
+        element.textContent = element.dataset[language];
+      }
+    });
+
+    document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]").forEach(input => {
+      input.placeholder = language === "hi"
+        ? input.dataset.placeholderHi
+        : input.dataset.placeholderEn;
+    });
+
+    message.textContent = "";
+  }
+
+  function toggleOtherSkill() {
+    const showOther = skillSelect.value === "Other";
+    otherSkillWrap.classList.toggle("hidden", !showOther);
+    otherSkillInput.required = showOther;
+  }
+
+  languageSelect.addEventListener("change", () => {
+    localStorage.setItem(languageKey, languageSelect.value);
+    translatePage(languageSelect.value);
+  });
+
+  skillSelect.addEventListener("change", toggleOtherSkill);
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    message.textContent = "";
+
+    const mobile = document.getElementById("mobile").value.trim();
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+      message.textContent = language === "hi"
+        ? "कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें।"
+        : "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+
+    const profile = {
+      fullName: document.getElementById("fullName").value.trim(),
+      role: document.getElementById("role").value,
+      email: document.getElementById("email").value.trim(),
+      mobile,
+      city: document.getElementById("city").value.trim(),
+      skill: skillSelect.value === "Other"
+        ? otherSkillInput.value.trim()
+        : skillSelect.value,
+      experience: document.getElementById("experience").value,
+      savedAt: new Date().toISOString()
+    };
+
+    try {
+      localStorage.setItem("skillset_demo_profile", JSON.stringify(profile));
+
+      message.textContent = language === "hi"
+        ? "आपकी डेमो प्रोफ़ाइल इस ब्राउज़र में सेव हो गई है!"
+        : "Your demo profile has been saved in this browser!";
+
+      form.reset();
+      toggleOtherSkill();
+    } catch (error) {
+      message.textContent = language === "hi"
+        ? "प्रोफ़ाइल सेव नहीं हो सकी। कृपया ब्राउज़र स्टोरेज की जाँच करें।"
+        : "Could not save your profile. Please check browser storage.";
+    }
+  });
+
+  translatePage(language);
+  toggleOtherSkill();
+})();
+</script>
+
+</body>
+</html>

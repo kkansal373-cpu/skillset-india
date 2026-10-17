@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SkillSet India connects skilled workers, freelancers, teachers and employers.">
+  <title>SkillSet India | Home</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .navbar nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .language-select {
+      max-width: 220px;
+      padding: 9px 12px;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      background: white;
+      color: #14213d;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .hero-art {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #e2edff, #d8fbf3);
+      min-width: 0;
+    }
+
+    .art-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 15px 40px rgba(30, 64, 120, 0.08);
+      box-sizing: border-box;
+    }
+
+    .big-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .worker-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+      margin-top: 16px;
+      border-radius: 14px;
+    }
+
+    .art-card h2 {
+      font-size: 24px;
+      margin: 12px 0;
+    }
+
+    .art-card p,
+    .home-services .card p,
+    .notice {
+      line-height: 1.65;
+    }
+
+    .home-services {
+      margin-top: 45px;
+    }
+
+    .home-services .card {
+      text-decoration: none;
+    }
+
+    .notice {
+      margin: 30px 0;
+    }
+
+    [data-i18n] {
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        gap: 12px;
+      }
+
+      .language-select {
+        max-width: 100%;
+      }
+
+      .hero-art {
+        padding: 14px;
+      }
+
+      .art-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<header class="navbar">
+  <a class="logo" href="index.html">🇮🇳 SkillSet India</a>
+
+  <nav aria-label="Main navigation">
+    <a href="index.html" data-i18n="nav_home"
+       data-en="Home" data-hi="होम">Home</a>
+    <a href="jobs.html" data-i18n="nav_jobs"
+       data-en="Find Work" data-hi="काम खोजें">Find Work</a>
+    <a href="hire.html" data-i18n="nav_hire"
+       data-en="Hire Talent" data-hi="लोगों को काम पर रखें">Hire Talent</a>
+    <a href="skills.html" data-i18n="nav_skills"
+       data-en="Skill Exchange" data-hi="कौशल का आदान-प्रदान">Skill Exchange</a>
+    <a href="learn.html" data-i18n="nav_learn"
+       data-en="Learn & Earn" data-hi="सीखें और कमाएँ">Learn & Earn</a>
+    <a href="wallet.html" data-i18n="nav_wallet"
+       data-en="Wallet" data-hi="वॉलेट">Wallet</a>
+    <a href="register.html" data-i18n="nav_register"
+       data-en="Register" data-hi="रजिस्टर करें">Register</a>
+  </nav>
+
+  <label for="siteLanguage" class="language-label">
+    <span data-en="Language" data-hi="भाषा">Language</span>
+  </label>
+
+  <select id="siteLanguage" class="language-select"
+          aria-label="Choose website language">
+    <option value="en">English</option>
+    <option value="hi">हिंदी - Hindi</option>
+    <option value="bn">বাংলা - Bengali</option>
+    <option value="te">తెలుగు - Telugu</option>
+    <option value="mr">मराठी - Marathi</option>
+    <option value="ta">தமிழ் - Tamil</option>
+    <option value="gu">ગુજરાતી - Gujarati</option>
+    <option value="ur">اردو - Urdu</option>
+    <option value="kn">ಕನ್ನಡ - Kannada</option>
+    <option value="ml">മലയാളം - Malayalam</option>
+    <option value="pa">ਪੰਜਾਬੀ - Punjabi</option>
+    <option value="or">ଓଡ଼ିଆ - Odia</option>
+    <option value="as">অসমীয়া - Assamese</option>
+    <option value="ne">नेपाली - Nepali</option>
+    <option value="sa">संस्कृतम् - Sanskrit</option>
+    <option value="ks">कॉशुर - Kashmiri</option>
+    <option value="sd">سنڌी - Sindhi</option>
+    <option value="kok">कोंकणी - Konkani</option>
+    <option value="mai">मैथिली - Maithili</option>
+    <option value="doi">डोगरी - Dogri</option>
+    <option value="mni">মৈতৈলোন্ - Manipuri</option>
+    <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ - Santali</option>
+    <option value="brx">बड़ो - Bodo</option>
+  </select>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <span class="badge" data-i18n="hero_badge"
+            data-en="Har Hunar Ki Pehchaan"
+            data-hi="हर हुनर की पहचान">
+        Har Hunar Ki Pehchaan
+      </span>
+
+      <h1>Hunar Hai?<br><span class="blue">Kaam Pao!</span></h1>
+
+      <p data-i18n="hero_description"
+         data-en="SkillSet India connects skilled workers, freelancers, teachers and employers on one platform."
+         data-hi="स्किलसेट इंडिया कुशल कामगारों, फ्रीलांसरों, शिक्षकों और नियोक्ताओं को एक मंच पर जोड़ता है।">
+        SkillSet India connects skilled workers, freelancers, teachers and employers on one platform.
+      </p>
+
+      <a class="btn" href="jobs.html" data-i18n="hero_find_work"
+         data-en="Find Work →" data-hi="काम खोजें →">Find Work →</a>
+
+      <a class="btn secondary" href="hire.html" data-i18n="hero_hire"
+         data-en="Hire Talent" data-hi="लोगों को काम पर रखें">Hire Talent</a>
+    </div>
+
+    <div class="hero-art">
+      <div class="art-card">
+        <div class="big-icon" aria-hidden="true">🧰 💻 🎓</div>
+
+        <h2 data-i18n="hero_card_title"
+            data-en="Every Skill Has Value"
+            data-hi="हर हुनर की अपनी कीमत है">
+          Every Skill Has Value
+        </h2>
+
+        <p data-i18n="hero_card_description"
+           data-en="From local workers to designers, coders and teachers — opportunities for everyone."
+           data-hi="स्थानीय कामगारों से लेकर डिजाइनरों, कोडर्स और शिक्षकों तक — सभी के लिए अवसर।">
+          From local workers to designers, coders and teachers — opportunities for everyone.
+        </p>
+
+        <img class="worker-photo" src="workers.png"
+             alt="Skilled workers and professionals" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <section class="home-services">
+    <h2 data-i18n="services_title"
+        data-en="Explore Our Services"
+        data-hi="हमारी सेवाएँ देखें">Explore Our Services</h2>
+
+    <section class="grid">
+      <a class="card" href="jobs.html">
+        <h3>💼 <span data-i18n="service_find_work"
+            data-en="Find Work" data-hi="काम खोजें">Find Work</span></h3>
+        <p data-i18n="service_find_work_desc"
+           data-en="Discover jobs and work opportunities that match your skills."
+           data-hi="अपने कौशल के अनुसार नौकरी और काम के अवसर खोजें।">
+          Discover jobs and work opportunities that match your skills.
+        </p>
+      </a>
+
+      <a class="card" href="hire.html">
+        <h3>🤝 <span data-i18n="service_hire"
+            data-en="Hire Talent" data-hi="लोगों को काम पर रखें">Hire Talent</span></h3>
+        <p data-i18n="service_hire_desc"
+           data-en="Find skilled professionals for your work and projects."
+           data-hi="अपने काम और प्रोजेक्ट के लिए कुशल लोगों को खोजें।">
+          Find skilled professionals for your work and projects.
+        </p>
+      </a>
+
+      <a class="card" href="skills.html">
+        <h3>🔄 <span data-i18n="service_skills"
+            data-en="Skill Exchange" data-hi="कौशल का आदान-प्रदान">Skill Exchange</span></h3>
+        <p data-i18n="service_skills_desc"
+           data-en="Share your skills and learn new skills from others."
+           data-hi="अपने कौशल साझा करें और दूसरों से नए कौशल सीखें।">
+          Share your skills and learn new skills from others.
+        </p>
+      </a>
+
+      <a class="card" href="learn.html">
+        <h3>📚 <span data-i18n="service_learn"
+            data-en="Learn & Earn" data-hi="सीखें और कमाएँ">Learn & Earn</span></h3>
+        <p data-i18n="service_learn_desc"
+           data-en="Learn, teach and develop your knowledge and abilities."
+           data-hi="सीखें, सिखाएँ और अपना ज्ञान व क्षमताएँ बढ़ाएँ।">
+          Learn, teach and develop your knowledge and abilities.
+        </p>
+      </a>
+
+      <a class="card" href="wallet.html">
+        <h3>🎁 <span data-i18n="service_wallet"
+            data-en="Rewards Wallet" data-hi="रिवॉर्ड वॉलेट">Rewards Wallet</span></h3>
+        <p data-i18n="service_wallet_desc"
+           data-en="View your demo reward points and benefits."
+           data-hi="अपने डेमो रिवॉर्ड पॉइंट्स और लाभ देखें।">
+          View your demo reward points and benefits.
+        </p>
+      </a>
+
+      <a class="card" href="register.html">
+        <h3>👤 <span data-i18n="service_join"
+            data-en="Join Us" data-hi="हमसे जुड़ें">Join Us</span></h3>
+        <p data-i18n="service_join_desc"
+           data-en="Create your profile and explore new opportunities."
+           data-hi="अपनी प्रोफ़ाइल बनाएँ और नए अवसर खोजें।">
+          Create your profile and explore new opportunities.
+        </p>
+      </a>
+    </section>
+  </section>
+
+  <div class="notice" data-i18n="demo_notice"
+       data-en="Student project demo by Team INNOVEXA. Jobs, accounts and rewards are currently for demonstration purposes."
+       data-hi="Team INNOVEXA द्वारा छात्र प्रोजेक्ट डेमो। नौकरियाँ, खाते और रिवॉर्ड अभी केवल प्रदर्शन के लिए हैं।">
+    Student project demo by Team INNOVEXA. Jobs, accounts and rewards are currently for demonstration purposes.
+  </div>
+</main>
+
+<footer>© 2026 SkillSet India | Team INNOVEXA</footer>
+
+<div id="google_translate_element" style="display:none"></div>
+
+<script src="script.js"></script>
+<script src="language.js"></script>
+</body>
+</html>

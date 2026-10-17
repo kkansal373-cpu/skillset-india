@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Work | SkillSet India</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .work-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .work-tools input,
+    .work-tools select,
+    .other-skill-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #d5dce5;
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    .job-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .job-card p { line-height: 1.5; }
+
+    .job-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .other-area { display: none; margin-top: 15px; }
+
+    .result-count,
+    .demo-note {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .empty-state { padding: 20px; text-align: center; }
+  </style>
+</head>
+
+<body>
+<header class="navbar">
+  <a class="logo" href="index.html">🇮🇳 SkillSet India</a>
+
+  <nav>
+    <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+    <a href="jobs.html" data-en="Find Work" data-hi="काम खोजें">Find Work</a>
+    <a href="hire.html" data-en="Hire Talent" data-hi="लोगों को काम पर रखें">Hire Talent</a>
+    <a href="skills.html" data-en="Skill Exchange" data-hi="कौशल का आदान-प्रदान">Skill Exchange</a>
+    <a href="learn.html" data-en="Learn & Earn" data-hi="सीखें और कमाएँ">Learn & Earn</a>
+    <a href="wallet.html" data-en="Wallet" data-hi="वॉलेट">Wallet</a>
+    <a href="register.html" data-en="Register" data-hi="रजिस्टर करें">Register</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="page-title">
+    <span class="badge" data-en="💼 Find Work" data-hi="💼 काम खोजें">💼 Find Work</span>
+    <h1 data-en="Find Work That Matches Your Skills"
+        data-hi="अपने कौशल के अनुसार काम खोजें">Find Work That Matches Your Skills</h1>
+    <p data-en="Explore opportunities across labour, engineering, technology, healthcare, education, business and many other professions."
+       data-hi="श्रम, इंजीनियरिंग, टेक्नोलॉजी, स्वास्थ्य, शिक्षा, बिज़नेस और कई अन्य क्षेत्रों में अवसर खोजें।">
+      Explore opportunities across labour, engineering, technology, healthcare, education, business and many other professions.
+    </p>
+  </section>
+
+  <section class="card">
+    <div class="work-tools">
+      <label>
+        <span data-en="Language" data-hi="भाषा">Language</span>
+        <select id="languageSelect" aria-label="Choose language">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+        </select>
+      </label>
+
+      <label>
+        <span data-en="Search Skills or Jobs" data-hi="कौशल या काम खोजें">Search Skills or Jobs</span>
+        <input id="jobSearch" type="search"
+          data-placeholder-en="Search a skill or profession..."
+          data-placeholder-hi="कौशल या पेशा खोजें..."
+          placeholder="Search a skill or profession...">
+      </label>
+
+      <label>
+        <span data-en="Filter by Category" data-hi="श्रेणी चुनें">Filter by Category</span>
+        <select id="categoryFilter">
+          <option value="" data-en="All Categories" data-hi="सभी श्रेणियाँ">All Categories</option>
+        </select>
+      </label>
+
+      <label>
+        <span data-en="Work Type" data-hi="काम का प्रकार">Work Type</span>
+        <select id="workType">
+          <option value="" data-en="All Work Types" data-hi="सभी प्रकार">All Work Types</option>
+          <option value="Full-time" data-en="Full-time" data-hi="पूर्णकालिक">Full-time</option>
+          <option value="Part-time" data-en="Part-time" data-hi="अंशकालिक">Part-time</option>
+          <option value="Freelance" data-en="Freelance" data-hi="फ्रीलांस">Freelance</option>
+          <option value="Contract" data-en="Contract" data-hi="अनुबंध">Contract</option>
+          <option value="Temporary / Daily Work" data-en="Temporary / Daily Work" data-hi="अस्थायी / दैनिक काम">Temporary / Daily Work</option>
+          <option value="Internship" data-en="Internship" data-hi="इंटर्नशिप">Internship</option>
+        </select>
+      </label>
+    </div>
+
+    <button class="btn" type="button" id="toggleOther"
+      data-en="+ Search Other Skill" data-hi="+ अन्य कौशल खोजें">+ Search Other Skill</button>
+
+    <div id="otherArea" class="other-area">
+      <label for="otherSkill" data-en="Enter Your Skill or Profession"
+        data-hi="अपना कौशल या पेशा लिखें">Enter Your Skill or Profession</label>
+
+      <div class="work-tools">
+        <input id="otherSkill" class="other-skill-input" type="text"
+          data-placeholder-en="Example: Robotics Engineer"
+          data-placeholder-hi="उदाहरण: रोबोटिक्स इंजीनियर"
+          placeholder="Example: Robotics Engineer">
+
+        <button class="btn" type="button" id="searchOther"
+          data-en="Search This Skill" data-hi="यह कौशल खोजें">Search This Skill</button>
+      </div>
+
+      <p class="demo-note"
+        data-en="Custom skills can be searched, but actual vacancies require employer listings."
+        data-hi="अन्य कौशल खोज सकते हैं, लेकिन वास्तविक रिक्तियों के लिए नियोक्ता की लिस्टिंग ज़रूरी है।">
+        Custom skills can be searched, but actual vacancies require employer listings.
+      </p>
+    </div>
+
+    <p id="resultCount" class="result-count" aria-live="polite"></p>
+  </section>
+
+  <section id="jobResults" class="grid"></section>
+
+  <section class="card" style="margin-top:30px">
+    <h2 data-en="Ready to Get Started?" data-hi="शुरू करने के लिए तैयार हैं?">Ready to Get Started?</h2>
+    <p data-en="Create your profile and showcase your skills and experience."
+       data-hi="अपनी प्रोफ़ाइल बनाएँ और अपना कौशल व अनुभव दिखाएँ।">
+      Create your profile and showcase your skills and experience.
+    </p>
+    <a class="btn" href="register.html" data-en="Register Now →" data-hi="अभी रजिस्टर करें →">Register Now →</a>
+    <a class="btn secondary" href="hire.html" data-en="Hire Talent" data-hi="लोगों को काम पर रखें">Hire Talent</a>
+  </section>
+
+  <div class="notice">
+    <strong data-en="Project Demo:" data-hi="प्रोजेक्ट डेमो:">Project Demo:</strong>
+    <span data-en="These are sample skill listings, not verified job vacancies. Real job applications and employer matching are not connected yet."
+      data-hi="ये कौशल की उदाहरण सूची हैं, सत्यापित नौकरी की रिक्तियाँ नहीं। वास्तविक आवेदन और नियोक्ता से मिलान अभी उपलब्ध नहीं हैं।">
+      These are sample skill listings, not verified job vacancies. Real job applications and employer matching are not connected yet.
+    </span>
+  </div>
+</main>
+
+<footer>© 2026 SkillSet India | Team INNOVEXA</footer>
+
+<script>
+"use strict";
+
+const skills = [
+  ["General Labour","Labour & Construction"],
+  ["Construction Worker","Labour & Construction"],
+  ["Mason / Raj Mistri","Labour & Construction"],
+  ["Helper","Labour & Construction"],
+  ["Carpenter","Labour & Construction"],
+  ["Electrician","Labour & Construction"],
+  ["Plumber","Labour & Construction"],
+  ["Painter","Labour & Construction"],
+  ["Welder","Labour & Construction"],
+  ["Tile Worker","Labour & Construction"],
+  ["Steel Fixer","Labour & Construction"],
+  ["Shuttering Carpenter","Labour & Construction"],
+  ["Heavy Equipment Operator","Labour & Construction"],
+  ["Civil Site Supervisor","Labour & Construction"],
+
+  ["Architect","Engineering & Technical"],
+  ["Civil Engineer","Engineering & Technical"],
+  ["Mechanical Engineer","Engineering & Technical"],
+  ["Electrical Engineer","Engineering & Technical"],
+  ["Electronics Engineer","Engineering & Technical"],
+  ["Computer Engineer","Engineering & Technical"],
+  ["Software Engineer","Engineering & Technical"],
+  ["Chemical Engineer","Engineering & Technical"],
+  ["Automobile Engineer","Engineering & Technical"],
+  ["Structural Engineer","Engineering & Technical"],
+  ["Environmental Engineer","Engineering & Technical"],
+  ["Industrial Engineer","Engineering & Technical"],
+  ["Robotics Engineer","Engineering & Technical"],
+  ["CAD Designer","Engineering & Technical"],
+
+  ["AC Technician","Repair & Maintenance"],
+  ["Refrigerator Technician","Repair & Maintenance"],
+  ["Washing Machine Technician","Repair & Maintenance"],
+  ["Mobile Repair Technician","Repair & Maintenance"],
+  ["Computer Hardware Technician","Repair & Maintenance"],
+  ["Car Mechanic","Repair & Maintenance"],
+  ["Bike Mechanic","Repair & Maintenance"],
+  ["CCTV Technician","Repair & Maintenance"],
+  ["Solar Panel Technician","Repair & Maintenance"],
+  ["Network Technician","Repair & Maintenance"],
+
+  ["Web Developer","IT & Digital"],
+  ["Frontend Developer","IT & Digital"],
+  ["Backend Developer","IT & Digital"],
+  ["Full Stack Developer","IT & Digital"],
+  ["App Developer","IT & Digital"],
+  ["Python Developer","IT & Digital"],
+  ["Java Developer","IT & Digital"],
+  ["C / C++ Programmer","IT & Digital"],
+  ["AI / Machine Learning Engineer","IT & Digital"],
+  ["Data Analyst","IT & Digital"],
+  ["Data Scientist","IT & Digital"],
+  ["Cybersecurity Specialist","IT & Digital"],
+  ["Cloud Engineer","IT & Digital"],
+  ["DevOps Engineer","IT & Digital"],
+  ["Database Administrator","IT & Digital"],
+  ["IT Support Specialist","IT & Digital"],
+  ["Software Tester / QA","IT & Digital"],
+
+  ["UI / UX Designer","Design & Media"],
+  ["Graphic Designer","Design & Media"],
+  ["Video Editor","Design & Media"],
+  ["Photographer","Design & Media"],
+  ["Videographer","Design & Media"],
+  ["Animator","Design & Media"],
+  ["3D Artist","Design & Media"],
+  ["Illustrator","Design & Media"],
+  ["Content Writer","Design & Media"],
+  ["Copywriter","Design & Media"],
+  ["Translator","Design & Media"],
+
+  ["Digital Marketer","Marketing & Business"],
+  ["SEO Specialist","Marketing & Business"],
+  ["Social Media Manager","Marketing & Business"],
+  ["Sales Executive","Marketing & Business"],
+  ["Business Development Executive","Marketing & Business"],
+  ["Market Research Analyst","Marketing & Business"],
+
+  ["Accountant","Finance & Office"],
+  ["Chartered Accountant","Finance & Office"],
+  ["Bookkeeper","Finance & Office"],
+  ["Financial Analyst","Finance & Office"],
+  ["Data Entry Operator","Finance & Office"],
+  ["Office Assistant","Finance & Office"],
+  ["Receptionist","Finance & Office"],
+  ["HR Executive","Finance & Office"],
+  ["Project Manager","Finance & Office"],
+  ["Business Consultant","Finance & Office"],
+
+  ["Teacher","Education & Training"],
+  ["Mathematics Teacher","Education & Training"],
+  ["Science Teacher","Education & Training"],
+  ["English Teacher","Education & Training"],
+  ["Computer Teacher","Education & Training"],
+  ["Online Tutor","Education & Training"],
+  ["Career Counsellor","Education & Training"],
+  ["Corporate Trainer","Education & Training"],
+
+  ["Doctor","Healthcare"],
+  ["Nurse","Healthcare"],
+  ["Pharmacist","Healthcare"],
+  ["Lab Technician","Healthcare"],
+  ["Physiotherapist","Healthcare"],
+  ["Medical Receptionist","Healthcare"],
+  ["Psychologist","Healthcare"],
+
+  ["Chef / Cook","Hospitality & Services"],
+  ["Baker","Hospitality & Services"],
+  ["Waiter / Server","Hospitality & Services"],
+  ["Hotel Manager","Hospitality & Services"],
+  ["Housekeeping Staff","Hospitality & Services"],
+  ["Event Planner","Hospitality & Services"],
+
+  ["Makeup Artist","Beauty & Fashion"],
+  ["Hair Stylist","Beauty & Fashion"],
+  ["Fashion Designer","Beauty & Fashion"],
+  ["Tailor","Beauty & Fashion"],
+  ["Interior Designer","Design & Media"],
+  ["Jewellery Designer","Beauty & Fashion"],
+
+  ["Driver","Transport & Logistics"],
+  ["Delivery Executive","Transport & Logistics"],
+  ["Logistics Coordinator","Transport & Logistics"],
+  ["Warehouse Worker","Transport & Logistics"],
+  ["Supply Chain Manager","Transport & Logistics"],
+
+  ["Security Guard","Safety & Security"],
+  ["Safety Officer","Safety & Security"],
+
+  ["Farm Worker","Agriculture & Environment"],
+  ["Agriculture Expert","Agriculture & Environment"],
+  ["Agronomist","Agriculture & Environment"],
+  ["Veterinarian","Agriculture & Environment"],
+  ["Gardener","Agriculture & Environment"],
+
+  ["Customer Support Executive","Customer Service"],
+  ["Call Centre Executive","Customer Service"],
+  ["Customer Success Manager","Customer Service"],
+
+  ["Legal Advisor","Legal & Professional"],
+  ["Lawyer","Legal & Professional"],
+  ["Company Secretary","Legal & Professional"],
+  ["Research Assistant","Legal & Professional"],
+  ["Scientist","Legal & Professional"],
+
+  ["Freelancer","Other Services"],
+  ["Entrepreneur / Business Owner","Other Services"],
+  ["Other","Other Services"]
+];
+
+const categoryTranslations = {
+  "Labour & Construction":"श्रम और निर्माण",
+  "Engineering & Technical":"इंजीनियरिंग और तकनीकी",
+  "Repair & Maintenance":"मरम्मत और रखरखाव",
+  "IT & Digital":"आईटी और डिजिटल",
+  "Design & Media":"डिज़ाइन और मीडिया",
+  "Marketing & Business":"मार्केटिंग और बिज़नेस",
+  "Finance & Office":"वित्त और कार्यालय",
+  "Education & Training":"शिक्षा और प्रशिक्षण",
+  "Healthcare":"स्वास्थ्य सेवाएँ",
+  "Hospitality & Services":"आतिथ्य और सेवाएँ",
+  "Beauty & Fashion":"ब्यूटी और फैशन",
+  "Transport & Logistics":"परिवहन और लॉजिस्टिक्स",
+  "Safety & Security":"सुरक्षा",
+  "Agriculture & Environment":"कृषि और पर्यावरण",
+  "Customer Service":"ग्राहक सेवा",
+  "Legal & Professional":"कानूनी और पेशेवर सेवाएँ",
+  "Other Services":"अन्य सेवाएँ"
+};
+
+const skillTranslations = {
+  "General Labour":"सामान्य मजदूर",
+  "Construction Worker":"निर्माण मजदूर",
+  "Mason / Raj Mistri":"राज मिस्त्री",
+  "Helper":"सहायक",
+  "Carpenter":"बढ़ई",
+  "Electrician":"इलेक्ट्रीशियन",
+  "Plumber":"प्लंबर",
+  "Painter":"पेंटर",
+  "Welder":"वेल्डर",
+  "Tile Worker":"टाइल लगाने वाला",
+  "Steel Fixer":"सरिया बाँधने वाला",
+  "Shuttering Carpenter":"शटरिंग बढ़ई",
+  "Heavy Equipment Operator":"भारी मशीन ऑपरेटर",
+  "Civil Site Supervisor":"सिविल साइट सुपरवाइज़र",
+  "Architect":"वास्तुकार",
+  "Civil Engineer":"सिविल इंजीनियर",
+  "Mechanical Engineer":"मैकेनिकल इंजीनियर",
+  "Electrical Engineer":"इलेक्ट्रिकल इंजीनियर",
+  "Electronics Engineer":"इलेक्ट्रॉनिक्स इंजीनियर",
+  "Computer Engineer":"कंप्यूटर इंजीनियर",
+  "Software Engineer":"सॉफ्टवेयर इंजीनियर",
+  "Chemical Engineer":"केमिकल इंजीनियर",
+  "Automobile Engineer":"ऑटोमोबाइल इंजीनियर",
+  "Structural Engineer":"स्ट्रक्चरल इंजीनियर",
+  "Environmental Engineer":"पर्यावरण इंजीनियर",
+  "Industrial Engineer":"इंडस्ट्रियल इंजीनियर",
+  "Robotics Engineer":"रोबोटिक्स इंजीनियर",
+  "CAD Designer":"CAD डिज़ाइनर",
+  "AC Technician":"एसी तकनीशियन",
+  "Refrigerator Technician":"फ्रिज तकनीशियन",
+  "Washing Machine Technician":"वॉशिंग मशीन तकनीशियन",
+  "Mobile Repair Technician":"मोबाइल रिपेयर तकनीशियन",
+  "Computer Hardware Technician":"कंप्यूटर हार्डवेयर तकनीशियन",
+  "Car Mechanic":"कार मैकेनिक",
+  "Bike Mechanic":"बाइक मैकेनिक",
+  "CCTV Technician":"सीसीटीवी तकनीशियन",
+  "Solar Panel Technician":"सोलर पैनल तकनीशियन",
+  "Network Technician":"नेटवर्क तकनीशियन",
+  "Web Developer":"वेब डेवलपर",
+  "Frontend Developer":"फ्रंटएंड डेवलपर",
+  "Backend Developer":"बैकएंड डेवलपर",
+  "Full Stack Developer":"फुल स्टैक डेवलपर",
+  "App Developer":"ऐप डेवलपर",
+  "Python Developer":"पायथन डेवलपर",
+  "Java Developer":"जावा डेवलपर",
+  "C / C++ Programmer":"C / C++ प्रोग्रामर",
+  "AI / Machine Learning Engineer":"AI / मशीन लर्निंग इंजीनियर",
+  "Data Analyst":"डेटा विश्लेषक",
+  "Data Scientist":"डेटा साइंटिस्ट",
+  "Cybersecurity Specialist":"साइबर सुरक्षा विशेषज्ञ",
+  "Cloud Engineer":"क्लाउड इंजीनियर",
+  "DevOps Engineer":"DevOps इंजीनियर",
+  "Database Administrator":"डेटाबेस एडमिनिस्ट्रेटर",
+  "IT Support Specialist":"आईटी सपोर्ट विशेषज्ञ",
+  "Software Tester / QA":"सॉफ्टवेयर टेस्टर / QA",
+  "UI / UX Designer":"UI / UX डिज़ाइनर",
+  "Graphic Designer":"ग्राफिक डिज़ाइनर",
+  "Video Editor":"वीडियो एडिटर",
+  "Photographer":"फोटोग्राफर",
+  "Videographer":"वीडियोग्राफर",
+  "Animator":"एनिमेटर",
+  "3D Artist":"3D कलाकार",
+  "Illustrator":"इलस्ट्रेटर",
+  "Content Writer":"कंटेंट राइटर",
+  "Copywriter":"कॉपीराइटर",
+  "Translator":"अनुवादक",
+  "Digital Marketer":"डिजिटल मार्केटर",
+  "SEO Specialist":"SEO विशेषज्ञ",
+  "Social Media Manager":"सोशल मीडिया मैनेजर",
+  "Sales Executive":"सेल्स एग्जीक्यूटिव",
+  "Business Development Executive":"बिज़नेस डेवलपमेंट एग्जीक्यूटिव",
+  "Market Research Analyst":"मार्केट रिसर्च विश्लेषक",
+  "Accountant":"अकाउंटेंट",
+  "Chartered Accountant":"चार्टर्ड अकाउंटेंट",
+  "Bookkeeper":"बुककीपर",
+  "Financial Analyst":"वित्तीय विश्लेषक",
+  "Data Entry Operator":"डेटा एंट्री ऑपरेटर",
+  "Office Assistant":"ऑफिस सहायक",
+  "Receptionist":"रिसेप्शनिस्ट",
+  "HR Executive":"HR एग्जीक्यूटिव",
+  "Project Manager":"प्रोजेक्ट मैनेजर",
+  "Business Consultant":"बिज़नेस सलाहकार",
+  "Teacher":"शिक्षक",
+  "Mathematics Teacher":"गणित शिक्षक",
+  "Science Teacher":"विज्ञान शिक्षक",
+  "English Teacher":"अंग्रेज़ी शिक्षक",
+  "Computer Teacher":"कंप्यूटर शिक्षक",
+  "Online Tutor":"ऑनलाइन ट्यूटर",
+  "Career Counsellor":"करियर काउंसलर",
+  "Corporate Trainer":"कॉर्पोरेट ट्रेनर",
+  "Doctor":"डॉक्टर",
+  "Nurse":"नर्स",
+  "Pharmacist":"फार्मासिस्ट",
+  "Lab Technician":"लैब तकनीशियन",
+  "Physiotherapist":"फिजियोथेरेपिस्ट",
+  "Medical Receptionist":"मेडिकल रिसेप्शनिस्ट",
+  "Psychologist":"मनोवैज्ञानिक",
+  "Chef / Cook":"शेफ / रसोइया",
+  "Baker":"बेकर",
+  "Waiter / Server":"वेटर / सर्वर",
+  "Hotel Manager":"होटल मैनेजर",
+  "Housekeeping Staff":"हाउसकीपिंग स्टाफ",
+  "Event Planner":"इवेंट प्लानर",
+  "Makeup Artist":"मेकअप आर्टिस्ट",
+  "Hair Stylist":"हेयर स्टाइलिस्ट",
+  "Fashion Designer":"फैशन डिज़ाइनर",
+  "Tailor":"दर्जी",
+  "Interior Designer":"इंटीरियर डिज़ाइनर",
+  "Jewellery Designer":"ज्वेलरी डिज़ाइनर",
+  "Driver":"ड्राइवर",
+  "Delivery Executive":"डिलीवरी एग्जीक्यूटिव",
+  "Logistics Coordinator":"लॉजिस्टिक्स कोऑर्डिनेटर",
+  "Warehouse Worker":"वेयरहाउस कर्मचारी",
+  "Supply Chain Manager":"सप्लाई चेन मैनेजर",
+  "Security Guard":"सिक्योरिटी गार्ड",
+  "Safety Officer":"सेफ्टी ऑफिसर",
+  "Farm Worker":"खेत मजदूर",
+  "Agriculture Expert":"कृषि विशेषज्ञ",
+  "Agronomist":"कृषि वैज्ञानिक",
+  "Veterinarian":"पशु चिकित्सक",
+  "Gardener":"माली",
+  "Customer Support Executive":"कस्टमर सपोर्ट एग्जीक्यूटिव",
+  "Call Centre Executive":"कॉल सेंटर एग्जीक्यूटिव",
+  "Customer Success Manager":"कस्टमर सक्सेस मैनेजर",
+  "Legal Advisor":"कानूनी सलाहकार",
+  "Lawyer":"वकील",
+  "Company Secretary":"कंपनी सचिव",
+  "Research Assistant":"रिसर्च असिस्टेंट",
+  "Scientist":"वैज्ञानिक",
+  "Freelancer":"फ्रीलांसर",
+  "Entrepreneur / Business Owner":"उद्यमी / व्यवसाय मालिक",
+  "Other":"अन्य"
+};
+
+const jobTypes = [
+  ["Full-time","पूर्णकालिक"],
+  ["Part-time","अंशकालिक"],
+  ["Freelance","फ्रीलांस"],
+  ["Contract","अनुबंध"],
+  ["Temporary / Daily Work","अस्थायी / दैनिक काम"],
+  ["Internship","इंटर्नशिप"]
+];
+
+const $ = id => document.getElementById(id);
+const searchInput = $("jobSearch");
+const categoryFilter = $("categoryFilter");
+const workTypeFilter = $("workType");
+const results = $("jobResults");
+const resultCount = $("resultCount");
+const languageSelect = $("languageSelect");
+const otherArea = $("otherArea");
+const otherInput = $("otherSkill");
+
+const STORAGE_KEY = "skillset_language";
+let currentLanguage = "en";
+let customSearchActive = false;
+
+function text(en, hi) {
+  return currentLanguage === "hi" ? hi : en;
+}
+
+function translatedSkill(skill) {
+  return currentLanguage === "hi" ? (skillTranslations[skill] || skill) : skill;
+}
+
+function getSavedLanguage() {
+  try {
+    const value = localStorage.getItem(STORAGE_KEY);
+    return value === "hi" || value === "en" ? value : "en";
+  } catch {
+    return "en";
+  }
+}
+
+function saveLanguage(language) {
+  currentLanguage = language === "hi" ? "hi" : "en";
+  try {
+    localStorage.setItem(STORAGE_KEY, currentLanguage);
+  } catch {}
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll("[data-en][data-hi]").forEach(element => {
+    // Avoid replacing child markup, such as nested spans.
+    if (element.children.length === 0) {
+      element.textContent = element.dataset[currentLanguage];
+    }
+  });
+
+  document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]").forEach(element => {
+    element.placeholder = element.getAttribute(
+      currentLanguage === "hi" ? "data-placeholder-hi" : "data-placeholder-en"
+    );
+  });
+
+  // Keep any language selector on this page synchronized.
+  document.querySelectorAll("#languageSelect, #siteLanguage, .language-select").forEach(select => {
+    if ([...select.options].some(option => option.value === currentLanguage)) {
+      select.value = currentLanguage;
+    }
+  });
+
+  renderJobs();
+  document.dispatchEvent(new CustomEvent("skillset-language-change", {
+    detail: { language: currentLanguage }
+  }));
+}
+
+const categories = [...new Set(skills.map(item => item[1]))];
+
+categories.forEach(category => {
+  const option = document.createElement("option");
+  option.value = category;
+  categoryFilter.appendChild(option);
+});
+
+function updateStaticLanguage() {
+  document.querySelectorAll("[data-en][data-hi]").forEach(element => {
+    if (element.children.length === 0) {
+      element.textContent = element.getAttribute(
+        currentLanguage === "hi" ? "data-hi" : "data-en"
+      );
+    }
+  });
+
+  document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]").forEach(element => {
+    element.placeholder = element.getAttribute(
+      currentLanguage === "hi" ? "data-placeholder-hi" : "data-placeholder-en"
+    );
+  });
+
+  categoryFilter.options[0].textContent = text("All Categories", "सभी श्रेणियाँ");
+
+  [...categoryFilter.options].slice(1).forEach(option => {
+    option.textContent = currentLanguage === "hi"
+      ? (categoryTranslations[option.value] || option.value)
+      : option.value;
+  });
+
+  [...workTypeFilter.options].forEach(option => {
+    const pair = jobTypes.find(item => item[0] === option.value);
+    if (option.value === "") option.textContent = text("All Work Types", "सभी प्रकार");
+    else if (pair) option.textContent = pair[currentLanguage === "hi" ? 1 : 0];
+  });
+}
+
+function renderJobs() {
+  const query = searchInput.value.trim().toLocaleLowerCase();
+  const category = categoryFilter.value;
+  const workType = workTypeFilter.value;
+  const customQuery = customSearchActive
+    ? otherInput.value.trim().toLocaleLowerCase()
+    : "";
+
+  const filtered = skills.filter(([skill, group]) => {
+    const translated = translatedSkill(skill).toLocaleLowerCase();
+    const translatedGroup = (categoryTranslations[group] || group).toLocaleLowerCase();
+
+    const matchesQuery = !query ||
+      skill.toLocaleLowerCase().includes(query) ||
+      translated.includes(query) ||
+      group.toLocaleLowerCase().includes(query) ||
+      translatedGroup.includes(query);
+
+    const matchesCategory = !category || group === category;
+
+    const matchesCustom = !customQuery ||
+      skill.toLocaleLowerCase().includes(customQuery) ||
+      translated.includes(customQuery) ||
+      group.toLocaleLowerCase().includes(customQuery) ||
+      translatedGroup.includes(customQuery);
+
+    // This is a skills directory, not a live vacancies database.
+    // A selected work type is displayed as a filter context, but actual
+    // vacancy-type filtering requires real job records.
+    return matchesQuery && matchesCategory && matchesCustom;
+  });
+
+  results.innerHTML = "";
+
+  if (filtered.length === 0) {
+    const card = document.createElement("div");
+    card.className = "card empty-state";
+
+    const heading = document.createElement("h3");
+    heading.textContent = text("No matching skills found", "कोई मिलती-जुलती स्किल नहीं मिली");
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text(
+      "Try another keyword or search your own skill using Other.",
+      "दूसरा शब्द खोजें या Other में अपनी स्किल लिखें।"
+    );
+
+    card.append(heading, paragraph);
+    results.appendChild(card);
+  } else {
+    const fragment = document.createDocumentFragment();
+
+    filtered.forEach(([skill, group]) => {
+      const article = document.createElement("article");
+      article.className = "card job-card";
+
+      const heading = document.createElement("h3");
+      heading.textContent = "💼 " + translatedSkill(skill);
+
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = currentLanguage === "hi"
+        ? (categoryTranslations[group] || group)
+        : group;
+
+      const description = document.createElement("p");
+      description.textContent = text(
+        "Explore work opportunities related to this profession.",
+        "इस पेशे से जुड़े काम के अवसर खोजें।"
+      );
+
+      const note = document.createElement("p");
+      note.className = "demo-note";
+      note.textContent = text(
+        "Sample skill listing — not a verified vacancy.",
+        "कौशल का उदाहरण — सत्यापित नौकरी की रिक्ति नहीं।"
+      );
+
+      const actions = document.createElement("div");
+      actions.className = "job-actions";
+
+      const register = document.createElement("a");
+      register.className = "btn";
+      register.href = "register.html";
+      register.textContent = text("Register / Apply", "रजिस्टर / आवेदन करें");
+
+      const hire = document.createElement("a");
+      hire.className = "btn secondary";
+      hire.href = "hire.html?skill=" + encodeURIComponent(skill);
+      hire.textContent = text("Hire This Skill", "इस कौशल के लिए लोगों को रखें");
+
+      actions.append(register, hire);
+      article.append(heading, tag, description, note, actions);
+      fragment.appendChild(article);
+    });
+
+    results.appendChild(fragment);
+  }
+
+  resultCount.textContent = text(
+    `${filtered.length} skills available`,
+    `${filtered.length} कौशल उपलब्ध हैं`
+  );
+
+  if (workType) {
+    const typeName = currentLanguage === "hi"
+      ? (jobTypes.find(item => item[0] === workType)?.[1] || workType)
+      : workType;
+
+    resultCount.textContent += text(
+      ` · Selected work type: ${typeName}. This demo has no individual vacancy records to filter.`,
+      ` · चुना गया काम: ${typeName}। इस डेमो में अलग-अलग नौकरी की रिक्तियों का डेटा नहीं है।`
+    );
+  }
+}
+
+$("toggleOther").addEventListener("click", () => {
+  customSearchActive = !customSearchActive;
+  otherArea.style.display = customSearchActive ? "block" : "none";
+
+  if (!customSearchActive) {
+    otherInput.value = "";
+  } else {
+    otherInput.focus();
+  }
+
+  renderJobs();
+});
+
+$("searchOther").addEventListener("click", () => {
+  const value = otherInput.value.trim();
+
+  if (!value) {
+    otherInput.focus();
+    return;
+  }
+
+  searchInput.value = value;
+  customSearchActive = false;
+  otherArea.style.display = "none";
+  renderJobs();
+});
+
+searchInput.addEventListener("input", renderJobs);
+categoryFilter.addEventListener("change", renderJobs);
+workTypeFilter.addEventListener("change", renderJobs);
+otherInput.addEventListener("input", renderJobs);
+
+languageSelect.addEventListener("change", () => {
+  saveLanguage(languageSelect.value);
+});
+
+document.addEventListener("skillset-language-change", event => {
+  if (event.detail && event.detail.language) {
+    currentLanguage = event.detail.language === "hi" ? "hi" : "en";
+    languageSelect.value = currentLanguage;
+    document.documentElement.lang = currentLanguage;
+    updateStaticLanguage();
+    renderJobs();
+  }
+});
+
+const params = new URLSearchParams(window.location.search);
+const selectedSkill = params.get("skill");
+if (selectedSkill) searchInput.value = selectedSkill;
+
+currentLanguage = getSavedLanguage();
+languageSelect.value = currentLanguage;
+updateStaticLanguage();
+renderJobs();
+</script>
+
+<script src="script.js"></script>
+<script src="language.js"></script>
+</body>
+</html>

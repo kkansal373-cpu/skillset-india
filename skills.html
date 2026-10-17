@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Exchange | SkillSet India</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .skill-search {
+      width: 100%;
+      padding: 13px;
+      margin: 12px 0;
+      border: 1px solid #d5dce5;
+      border-radius: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .skill-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .skill-card p { line-height: 1.6; }
+
+    .skill-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .skill-actions .btn {
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .skill-category { margin: 30px 0 15px; }
+
+    .skill-count {
+      color: #64748b;
+      margin-top: 8px;
+    }
+
+    .language-control {
+      padding: 7px 10px;
+      border: 1px solid #d5dce5;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <a class="logo" href="index.html">🇮🇳 SkillSet India</a>
+
+  <nav>
+    <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+    <a href="jobs.html" data-en="Find Work" data-hi="काम खोजें">Find Work</a>
+    <a href="hire.html" data-en="Hire Talent" data-hi="काम पर रखें">Hire Talent</a>
+    <a href="skills.html" data-en="Skill Exchange" data-hi="कौशल साझा करें">Skill Exchange</a>
+    <a href="learn.html" data-en="Learn & Earn" data-hi="सीखें और कमाएँ">Learn & Earn</a>
+    <a href="wallet.html" data-en="Wallet" data-hi="वॉलेट">Wallet</a>
+    <a href="register.html" data-en="Register" data-hi="रजिस्टर करें">Register</a>
+  </nav>
+
+  <select id="siteLanguage" class="language-control" aria-label="Select language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+  </select>
+</header>
+
+<main class="container">
+
+  <section class="page-title">
+    <span class="badge" data-en="🚀 Skill Exchange" data-hi="🚀 कौशल साझा करें">
+      🚀 Skill Exchange
+    </span>
+
+    <h1
+      data-en="Learn Skills. Share Knowledge. Grow Together."
+      data-hi="कौशल सीखें। ज्ञान बाँटें। साथ आगे बढ़ें।">
+      Learn Skills. Share Knowledge. Grow Together.
+    </h1>
+
+    <p
+      data-en="Share your knowledge, learn new skills from others and move your career forward. Choose a skill and explore learning and work opportunities."
+      data-hi="अपना ज्ञान साझा करें, दूसरों से नए कौशल सीखें और अपने करियर को आगे बढ़ाएँ। अपनी पसंद का कौशल चुनें और सीखने तथा काम के अवसर खोजें।">
+      Share your knowledge, learn new skills from others and move your career forward. Choose a skill and explore learning and work opportunities.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2 data-en="🔎 Explore All Skills" data-hi="🔎 सभी कौशल देखें">
+      🔎 Explore All Skills
+    </h2>
+
+    <input
+      type="search"
+      id="skillSearch"
+      class="skill-search"
+      data-placeholder-en="Search skills: Python, AI, Web Design..."
+      data-placeholder-hi="कौशल खोजें: पायथन, एआई, वेब डिज़ाइन..."
+      placeholder="Search skills: Python, AI, Web Design..."
+      aria-label="Search skills">
+
+    <p id="skillCount" class="skill-count" aria-live="polite"></p>
+  </section>
+
+  <h2 class="skill-category"
+      data-en="💻 Programming & Technology"
+      data-hi="💻 प्रोग्रामिंग और तकनीक">
+    💻 Programming & Technology
+  </h2>
+
+  <section class="grid">
+
+    <article class="card skill-card" data-skill="Python Programming">
+      <h3>🐍 Python Programming</h3>
+      <p>Python coding, automation, logic building aur projects banana seekho.</p>
+      <span class="tag">Programming</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Python%20Programming">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="C and C++ Programming">
+      <h3>⚙️ C / C++ Programming</h3>
+      <p>Programming fundamentals, loops, functions aur problem solving.</p>
+      <span class="tag">Programming</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=C%20%2F%20C%2B%2B%20Programming">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Web Development">
+      <h3>🌐 Web Development</h3>
+      <p>HTML, CSS aur JavaScript se websites banana seekho.</p>
+      <span class="tag">Web Development</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Web%20Development">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="App Development">
+      <h3>📱 App Development</h3>
+      <p>Mobile applications ka design, development aur testing.</p>
+      <span class="tag">Technology</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=App%20Development">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Artificial Intelligence">
+      <h3>🤖 Artificial Intelligence</h3>
+      <p>AI tools, machine learning basics aur intelligent applications.</p>
+      <span class="tag">AI</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Artificial%20Intelligence">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Data Science">
+      <h3>📊 Data Science</h3>
+      <p>Data analysis, charts, statistics aur data se insights nikalna.</p>
+      <span class="tag">Data</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Data%20Science">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Cybersecurity">
+      <h3>🔐 Cybersecurity</h3>
+      <p>Online safety, security fundamentals aur systems ko protect karna.</p>
+      <span class="tag">Security</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Cybersecurity">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Computer Fundamentals">
+      <h3>🖥️ Computer Fundamentals</h3>
+      <p>Computer basics, files, internet, software aur digital literacy.</p>
+      <span class="tag">Computer</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Computer%20Fundamentals">Find Work →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <h2 class="skill-category"
+      data-en="🎨 Design & Creative Skills"
+      data-hi="🎨 डिज़ाइन और रचनात्मक कौशल">
+    🎨 Design & Creative Skills
+  </h2>
+
+  <section class="grid">
+
+    <article class="card skill-card" data-skill="Graphic Design">
+      <h3>🎨 Graphic Design</h3>
+      <p>Logos, posters, banners, advertisements aur social media creatives.</p>
+      <span class="tag">Design</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Graphic%20Design">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="UI UX Design">
+      <h3>📲 UI / UX Design</h3>
+      <p>Websites aur apps ke attractive, simple aur user-friendly interfaces.</p>
+      <span class="tag">UI / UX</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=UI%20UX%20Design">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Video Editing">
+      <h3>🎬 Video Editing</h3>
+      <p>Reels, YouTube videos, transitions, subtitles aur promotional videos.</p>
+      <span class="tag">Video</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Video%20Editing">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Photography">
+      <h3>📸 Photography</h3>
+      <p>Product photography, portraits, events aur photo composition.</p>
+      <span class="tag">Photography</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Photography">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Animation">
+      <h3>✨ Animation</h3>
+      <p>Motion graphics, animated videos aur visual storytelling.</p>
+      <span class="tag">Creative</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Animation">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="3D Design">
+      <h3>🧊 3D Design</h3>
+      <p>3D objects, models, product visuals aur digital scenes banana.</p>
+      <span class="tag">3D Design</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=3D%20Design">Find Work →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <h2 class="skill-category"
+      data-en="📈 Digital Business & Marketing"
+      data-hi="📈 डिजिटल व्यवसाय और मार्केटिंग">
+    📈 Digital Business & Marketing
+  </h2>
+
+  <section class="grid">
+
+    <article class="card skill-card" data-skill="Digital Marketing">
+      <h3>📢 Digital Marketing</h3>
+      <p>Online campaigns, digital promotion aur brand awareness.</p>
+      <span class="tag">Marketing</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Digital%20Marketing">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Social Media Management">
+      <h3>📱 Social Media Management</h3>
+      <p>Social media pages, content calendars aur audience engagement.</p>
+      <span class="tag">Social Media</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Social%20Media%20Management">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="SEO">
+      <h3>🔍 SEO</h3>
+      <p>Search engine optimisation aur website visibility improve karna.</p>
+      <span class="tag">Marketing</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=SEO">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Content Writing">
+      <h3>✍️ Content Writing</h3>
+      <p>Blogs, articles, website copy aur engaging captions likhna.</p>
+      <span class="tag">Writing</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Content%20Writing">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Copywriting">
+      <h3>📝 Copywriting</h3>
+      <p>Advertisements, product descriptions aur sales-focused writing.</p>
+      <span class="tag">Writing</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Copywriting">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="E Commerce">
+      <h3>🛒 E-commerce</h3>
+      <p>Online stores, product listings aur digital selling ke basics.</p>
+      <span class="tag">Business</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=E-commerce">Find Work →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <h2 class="skill-category"
+      data-en="📊 Office, Finance & Professional Skills"
+      data-hi="📊 ऑफिस, वित्त और पेशेवर कौशल">
+    📊 Office, Finance & Professional Skills
+  </h2>
+
+  <section class="grid">
+
+    <article class="card skill-card" data-skill="Excel">
+      <h3>📊 Excel & Spreadsheets</h3>
+      <p>Formulas, functions, data tables, reports aur charts.</p>
+      <span class="tag">Office</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Excel">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Accounting">
+      <h3>🧾 Accounting</h3>
+      <p>Bookkeeping, basic accounts, invoices aur financial records.</p>
+      <span class="tag">Finance</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Accounting">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Data Entry">
+      <h3>⌨️ Data Entry</h3>
+      <p>Typing, spreadsheets aur digital records maintain karna.</p>
+      <span class="tag">Office</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Data%20Entry">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Project Management">
+      <h3>📋 Project Management</h3>
+      <p>Tasks, deadlines, teamwork aur project planning.</p>
+      <span class="tag">Management</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Project%20Management">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Entrepreneurship">
+      <h3>💡 Entrepreneurship</h3>
+      <p>Business ideas, planning, customer needs aur startup basics.</p>
+      <span class="tag">Business</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Entrepreneurship">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Sales">
+      <h3>🤝 Sales & Customer Relations</h3>
+      <p>Customer communication, product presentation aur sales skills.</p>
+      <span class="tag">Professional</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Sales">Find Work →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <h2 class="skill-category"
+      data-en="🗣️ Communication & Education"
+      data-hi="🗣️ बातचीत और शिक्षा">
+    🗣️ Communication & Education
+  </h2>
+
+  <section class="grid">
+
+    <article class="card skill-card" data-skill="English Speaking">
+      <h3>🇬🇧 English Speaking</h3>
+      <p>Daily conversation, vocabulary, pronunciation aur confidence.</p>
+      <span class="tag">Language</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=English%20Speaking">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Public Speaking">
+      <h3>🎤 Public Speaking</h3>
+      <p>Presentations, speech delivery aur audience ke saamne bolna.</p>
+      <span class="tag">Communication</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Public%20Speaking">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Mathematics Tutoring">
+      <h3>📐 Mathematics Tutoring</h3>
+      <p>Maths concepts samjhana aur students ko practice karwana.</p>
+      <span class="tag">Teaching</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Mathematics%20Tutoring">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Science Tutoring">
+      <h3>🔬 Science Tutoring</h3>
+      <p>Science concepts, explanations aur study support.</p>
+      <span class="tag">Teaching</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Science%20Tutoring">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Communication Skills">
+      <h3>💬 Communication Skills</h3>
+      <p>Listening, teamwork, professional messages aur collaboration.</p>
+      <span class="tag">Soft Skills</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Communication%20Skills">Find Work →</a>
+      </div>
+    </article>
+
+    <article class="card skill-card" data-skill="Resume and Interview Skills">
+      <h3>📄 Resume & Interview Skills</h3>
+      <p>Resume banana, interview preparation aur career readiness.</p>
+      <span class="tag">Career</span>
+      <div class="skill-actions">
+        <a class="btn" href="learn.html">Learn Skill</a>
+        <a class="btn secondary" href="jobs.html?skill=Resume%20and%20Interview%20Skills">Find Work →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="card" style="margin-top:35px">
+    <h2 data-en="🌟 Share Your Knowledge" data-hi="🌟 अपना ज्ञान साझा करें">
+      🌟 Share Your Knowledge
+    </h2>
+
+    <p
+      data-en="Expert in a skill? Create your profile, share your knowledge and explore learning opportunities."
+      data-hi="किसी कौशल में विशेषज्ञ हैं? अपनी प्रोफ़ाइल बनाएँ, ज्ञान साझा करें और सीखने के अवसर खोजें।">
+      Expert in a skill? Create your profile, share your knowledge and explore learning opportunities.
+    </p>
+
+    <div class="skill-actions">
+      <a class="btn" href="register.html"
+         data-en="Join SkillSet India →"
+         data-hi="SkillSet India से जुड़ें →">Join SkillSet India →</a>
+
+      <a class="btn secondary" href="jobs.html"
+         data-en="Explore Work"
+         data-hi="काम के अवसर देखें">Explore Work</a>
+    </div>
+  </section>
+
+  <div class="notice"
+       data-en="College Project Demo: Learning and work links are demo navigation. Real teachers, employers, job listings and skill matching are not connected to a database yet."
+       data-hi="कॉलेज प्रोजेक्ट डेमो: सीखने और काम के लिंक डेमो के लिए हैं। वास्तविक शिक्षक, नियोक्ता, नौकरी की सूची और कौशल मिलान अभी डेटाबेस से जुड़े नहीं हैं।">
+    College Project Demo: Learning and work links are demo navigation. Real teachers, employers, job listings and skill matching are not connected to a database yet.
+  </div>
+
+</main>
+
+<footer data-en="© 2026 SkillSet India | Team INNOVEXA"
+        data-hi="© 2026 SkillSet India | टीम INNOVEXA">
+  © 2026 SkillSet India | Team INNOVEXA
+</footer>
+
+<script>
+const languageSelect = document.getElementById("siteLanguage");
+const searchInput = document.getElementById("skillSearch");
+const skillCards = [...document.querySelectorAll(".skill-card")];
+const skillCount = document.getElementById("skillCount");
+const languageKey = "skillset_language";
+
+let currentLanguage = localStorage.getItem(languageKey) === "hi" ? "hi" : "en";
+
+const translations = {
+  "Python Programming": {
+    title: "🐍 पायथन प्रोग्रामिंग",
+    description: "पायथन कोडिंग, ऑटोमेशन, लॉजिक बनाना और प्रोजेक्ट तैयार करना सीखें।",
+    tag: "प्रोग्रामिंग"
+  },
+  "C and C++ Programming": {
+    title: "⚙️ सी / सी++ प्रोग्रामिंग",
+    description: "प्रोग्रामिंग की बुनियादी बातें, लूप, फंक्शन और समस्या समाधान सीखें।",
+    tag: "प्रोग्रामिंग"
+  },
+  "Web Development": {
+    title: "🌐 वेब डेवलपमेंट",
+    description: "HTML, CSS और JavaScript से वेबसाइट बनाना सीखें।",
+    tag: "वेब डेवलपमेंट"
+  },
+  "App Development": {
+    title: "📱 ऐप डेवलपमेंट",
+    description: "मोबाइल ऐप का डिज़ाइन, विकास और परीक्षण सीखें।",
+    tag: "तकनीक"
+  },
+  "Artificial Intelligence": {
+    title: "🤖 आर्टिफिशियल इंटेलिजेंस",
+    description: "एआई टूल, मशीन लर्निंग की बुनियादी बातें और स्मार्ट ऐप्लिकेशन सीखें।",
+    tag: "एआई"
+  },
+  "Data Science": {
+    title: "📊 डेटा साइंस",
+    description: "डेटा विश्लेषण, चार्ट, आँकड़े और डेटा से उपयोगी जानकारी निकालना सीखें।",
+    tag: "डेटा"
+  },
+  "Cybersecurity": {
+    title: "🔐 साइबर सुरक्षा",
+    description: "ऑनलाइन सुरक्षा और सिस्टम को सुरक्षित रखने के तरीके सीखें।",
+    tag: "सुरक्षा"
+  },
+  "Computer Fundamentals": {
+    title: "🖥️ कंप्यूटर की बुनियादी बातें",
+    description: "कंप्यूटर, फाइल, इंटरनेट, सॉफ्टवेयर और डिजिटल साक्षरता सीखें।",
+    tag: "कंप्यूटर"
+  },
+  "Graphic Design": {
+    title: "🎨 ग्राफिक डिज़ाइन",
+    description: "लोगो, पोस्टर, बैनर, विज्ञापन और सोशल मीडिया डिज़ाइन बनाएँ।",
+    tag: "डिज़ाइन"
+  },
+  "UI UX Design": {
+    title: "📲 यूआई / यूएक्स डिज़ाइन",
+    description: "वेबसाइट और ऐप के आकर्षक, सरल और उपयोगकर्ता-अनुकूल इंटरफेस बनाएँ।",
+    tag: "यूआई / यूएक्स"
+  },
+  "Video Editing": {
+    title: "🎬 वीडियो एडिटिंग",
+    description: "रील, यूट्यूब वीडियो, ट्रांज़िशन, सबटाइटल और प्रचार वीडियो बनाएँ।",
+    tag: "वीडियो"
+  },
+  "Photography": {
+    title: "📸 फोटोग्राफी",
+    description: "प्रोडक्ट फोटो, पोर्ट्रेट, इवेंट और फोटो कंपोज़िशन सीखें।",
+    tag: "फोटोग्राफी"
+  },
+  "Animation": {
+    title: "✨ एनिमेशन",
+    description: "मोशन ग्राफिक्स, एनिमेटेड वीडियो और दृश्य कहानी बनाना सीखें।",
+    tag: "रचनात्मक कौशल"
+  },
+  "3D Design": {
+    title: "🧊 3D डिज़ाइन",
+    description: "3D ऑब्जेक्ट, मॉडल, प्रोडक्ट विज़ुअल और डिजिटल दृश्य बनाएँ।",
+    tag: "3D डिज़ाइन"
+  },
+  "Digital Marketing": {
+    title: "📢 डिजिटल मार्केटिंग",
+    description: "ऑनलाइन अभियान, डिजिटल प्रचार और ब्रांड की पहचान बढ़ाना सीखें।",
+    tag: "मार्केटिंग"
+  },
+  "Social Media Management": {
+    title: "📱 सोशल मीडिया प्रबंधन",
+    description: "सोशल मीडिया पेज, कंटेंट कैलेंडर और दर्शकों से जुड़ना सीखें।",
+    tag: "सोशल मीडिया"
+  },
+  "SEO": {
+    title: "🔍 एसईओ",
+    description: "सर्च इंजन ऑप्टिमाइज़ेशन और वेबसाइट की पहुँच बढ़ाना सीखें।",
+    tag: "मार्केटिंग"
+  },
+  "Content Writing": {
+    title: "✍️ कंटेंट राइटिंग",
+    description: "ब्लॉग, लेख, वेबसाइट सामग्री और आकर्षक कैप्शन लिखें।",
+    tag: "लेखन"
+  },
+  "Copywriting": {
+    title: "📝 कॉपीराइटिंग",
+    description: "विज्ञापन, प्रोडक्ट विवरण और बिक्री के लिए प्रभावी सामग्री लिखें।",
+    tag: "लेखन"
+  },
+  "E Commerce": {
+    title: "🛒 ई-कॉमर्स",
+    description: "ऑनलाइन स्टोर, प्रोडक्ट लिस्टिंग और डिजिटल बिक्री की बुनियादी बातें सीखें।",
+    tag: "व्यवसाय"
+  },
+  "Excel": {
+    title: "📊 एक्सेल और स्प्रेडशीट",
+    description: "फॉर्मूला, फंक्शन, डेटा टेबल, रिपोर्ट और चार्ट बनाना सीखें।",
+    tag: "ऑफिस"
+  },
+  "Accounting": {
+    title: "🧾 लेखांकन",
+    description: "बहीखाता, हिसाब-किताब, बिल और वित्तीय रिकॉर्ड रखना सीखें।",
+    tag: "वित्त"
+  },
+  "Data Entry": {
+    title: "⌨️ डेटा एंट्री",
+    description: "टाइपिंग, स्प्रेडशीट और डिजिटल रिकॉर्ड संभालना सीखें।",
+    tag: "ऑफिस"
+  },
+  "Project Management": {
+    title: "📋 प्रोजेक्ट प्रबंधन",
+    description: "काम, समय-सीमा, टीमवर्क और प्रोजेक्ट की योजना बनाना सीखें।",
+    tag: "प्रबंधन"
+  },
+  "Entrepreneurship": {
+    title: "💡 उद्यमिता",
+    description: "व्यवसाय के विचार, योजना, ग्राहक की ज़रूरतें और स्टार्टअप की बुनियादी बातें सीखें।",
+    tag: "व्यवसाय"
+  },
+  "Sales": {
+    title: "🤝 बिक्री और ग्राहक संबंध",
+    description: "ग्राहकों से बातचीत, प्रोडक्ट प्रस्तुत करना और बिक्री कौशल सीखें।",
+    tag: "पेशेवर कौशल"
+  },
+  "English Speaking": {
+    title: "🇬🇧 अंग्रेज़ी बोलना",
+    description: "रोज़मर्रा की बातचीत, शब्दावली, उच्चारण और आत्मविश्वास का अभ्यास करें।",
+    tag: "भाषा"
+  },
+  "Public Speaking": {
+    title: "🎤 सार्वजनिक भाषण",
+    description: "प्रेज़ेंटेशन देना, भाषण और लोगों के सामने बोलने का अभ्यास करें।",
+    tag: "बातचीत"
+  },
+  "Mathematics Tutoring": {
+    title: "📐 गणित पढ़ाना",
+    description: "गणित के विषय समझाएँ और विद्यार्थियों को अभ्यास करवाएँ।",
+    tag: "शिक्षण"
+  },
+  "Science Tutoring": {
+    title: "🔬 विज्ञान पढ़ाना",
+    description: "विज्ञान के विषय समझाएँ और पढ़ाई में सहायता करें।",
+    tag: "शिक्षण"
+  },
+  "Communication Skills": {
+    title: "💬 बातचीत का कौशल",
+    description: "ध्यान से सुनना, टीमवर्क, पेशेवर संदेश और मिलकर काम करना सीखें।",
+    tag: "व्यक्तिगत कौशल"
+  },
+  "Resume and Interview Skills": {
+    title: "📄 रिज़्यूमे और इंटरव्यू कौशल",
+    description: "रिज़्यूमे बनाना, इंटरव्यू की तैयारी और करियर के लिए तैयार होना सीखें।",
+    tag: "करियर"
+  }
+};
+
+const categoryTranslations = {
+  "💻 Programming & Technology": "💻 प्रोग्रामिंग और तकनीक",
+  "🎨 Design & Creative Skills": "🎨 डिज़ाइन और रचनात्मक कौशल",
+  "📈 Digital Business & Marketing": "📈 डिजिटल व्यवसाय और मार्केटिंग",
+  "📊 Office, Finance & Professional Skills": "📊 ऑफिस, वित्त और पेशेवर कौशल",
+  "🗣️ Communication & Education": "🗣️ बातचीत और शिक्षा"
+};
+
+function applyLanguage(language) {
+  currentLanguage = language === "hi" ? "hi" : "en";
+  document.documentElement.lang = currentLanguage;
+  languageSelect.value = currentLanguage;
+
+  document.querySelectorAll("[data-en][data-hi]").forEach(element => {
+    element.textContent = currentLanguage === "hi"
+      ? element.dataset.hi
+      : element.dataset.en;
+  });
+
+  document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]").forEach(element => {
+    element.placeholder = currentLanguage === "hi"
+      ? element.dataset.placeholderHi
+      : element.dataset.placeholderEn;
+  });
+
+  document.querySelectorAll(".skill-card").forEach(card => {
+    const skillName = card.dataset.skill;
+    const translation = translations[skillName];
+
+    if (!translation) return;
+
+    const heading = card.querySelector("h3");
+    const description = card.querySelector("p");
+    const tag = card.querySelector(".tag");
+    const buttons = card.querySelectorAll(".skill-actions .btn");
+
+    if (currentLanguage === "hi") {
+      heading.textContent = translation.title;
+      description.textContent = translation.description;
+      tag.textContent = translation.tag;
+      buttons[0].textContent = "कौशल सीखें";
+      buttons[1].textContent = "काम खोजें →";
+    } else {
+      heading.textContent = card.dataset.originalTitle;
+      description.textContent = card.dataset.originalDescription;
+      tag.textContent = card.dataset.originalTag;
+      buttons[0].textContent = "Learn Skill";
+      buttons[1].textContent = "Find Work →";
+    }
+  });
+
+  document.querySelectorAll(".skill-category").forEach(heading => {
+    const englishText = heading.dataset.originalHeading;
+    heading.textContent = currentLanguage === "hi"
+      ? (categoryTranslations[englishText] || englishText)
+      : englishText;
+  });
+
+  localStorage.setItem("skillset_language", currentLanguage);
+  filterSkills();
+}
+
+function filterSkills() {
+  const query = searchInput.value.trim().toLocaleLowerCase();
+  let visible = 0;
+
+  skillCards.forEach(card => {
+    const skillName = card.dataset.skill;
+    const translated = translations[skillName] || {};
+    const searchText = [
+      card.dataset.originalTitle,
+      card.dataset.originalDescription,
+      card.dataset.originalTag,
+      skillName,
+      translated.title || "",
+      translated.description || "",
+      translated.tag || ""
+    ].join(" ").toLocaleLowerCase();
+
+    const matches = searchText.includes(query);
+    card.style.display = matches ? "" : "none";
+
+    if (matches) visible++;
+  });
+
+  document.querySelectorAll(".skill-category").forEach(heading => {
+    const section = heading.nextElementSibling;
+    if (!section || !section.classList.contains("grid")) return;
+
+    const hasVisible = [...section.querySelectorAll(".skill-card")]
+      .some(card => card.style.display !== "none");
+
+    heading.style.display = hasVisible ? "" : "none";
+  });
+
+  skillCount.textContent = currentLanguage === "hi"
+    ? `${visible} में से ${skillCards.length} कौशल दिखाए जा रहे हैं`
+    : `${visible} of ${skillCards.length} skills shown`;
+}
+
+/* Save the original English text before translating anything. */
+skillCards.forEach(card => {
+  card.dataset.originalTitle = card.querySelector("h3").textContent;
+  card.dataset.originalDescription = card.querySelector("p").textContent;
+  card.dataset.originalTag = card.querySelector(".tag").textContent;
+});
+
+document.querySelectorAll(".skill-category").forEach(heading => {
+  heading.dataset.originalHeading = heading.textContent.trim();
+});
+
+languageSelect.addEventListener("change", () => {
+  applyLanguage(languageSelect.value);
+});
+
+searchInput.addEventListener("input", filterSkills);
+
+applyLanguage(localStorage.getItem("skillset_language") || "en");
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
