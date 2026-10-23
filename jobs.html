@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +49,14 @@
     }
 
     .empty-state { padding: 20px; text-align: center; }
+
+    .registered-btn {
+      background: #2e9e4f !important;
+      color: #fff !important;
+      cursor: not-allowed;
+      pointer-events: none;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -504,6 +511,42 @@ function text(en, hi) {
   return currentLanguage === "hi" ? hi : en;
 }
 
+/* ================= Already-registered feature ================= */
+const JOBS_REGISTERED_LIST_KEY = "skillset_registered_skills";
+const JOBS_PROFILE_KEY = "skillset_demo_profile";
+
+// register.html ke dropdown ke naam jo is page ki skills se alag hain
+const jobsSkillAliases = {
+  "labourer": ["General Labour"],
+  "cook": ["Chef / Cook"],
+  "teacher / tutor": ["Teacher", "Online Tutor"],
+  "beauty professional": ["Makeup Artist", "Hair Stylist"]
+};
+
+function getRegisteredSkillSet() {
+  const set = new Set();
+
+  function add(name) {
+    const key = String(name || "").trim().toLowerCase();
+    if (!key) return;
+    set.add(key);
+    (jobsSkillAliases[key] || []).forEach(alias => set.add(alias.toLowerCase()));
+  }
+
+  try {
+    const list = JSON.parse(localStorage.getItem(JOBS_REGISTERED_LIST_KEY));
+    if (Array.isArray(list)) list.forEach(add);
+  } catch (error) {}
+
+  try {
+    const profile = JSON.parse(localStorage.getItem(JOBS_PROFILE_KEY));
+    if (profile && profile.skill) add(profile.skill);
+  } catch (error) {}
+
+  return set;
+}
+/* =============================================================== */
+
 function translatedSkill(skill) {
   return currentLanguage === "hi" ? (skillTranslations[skill] || skill) : skill;
 }
@@ -512,7 +555,7 @@ function getSavedLanguage() {
   try {
     const value = localStorage.getItem(STORAGE_KEY);
     return value === "hi" || value === "en" ? value : "en";
-  } catch {
+  } catch (error) {
     return "en";
   }
 }
@@ -521,7 +564,7 @@ function saveLanguage(language) {
   currentLanguage = language === "hi" ? "hi" : "en";
   try {
     localStorage.setItem(STORAGE_KEY, currentLanguage);
-  } catch {}
+  } catch (error) {}
   document.documentElement.lang = currentLanguage;
 
   document.querySelectorAll("[data-en][data-hi]").forEach(element => {
@@ -596,6 +639,8 @@ function renderJobs() {
     ? otherInput.value.trim().toLocaleLowerCase()
     : "";
 
+  const registeredSkills = getRegisteredSkillSet();
+
   const filtered = skills.filter(([skill, group]) => {
     const translated = translatedSkill(skill).toLocaleLowerCase();
     const translatedGroup = (categoryTranslations[group] || group).toLocaleLowerCase();
@@ -669,10 +714,23 @@ function renderJobs() {
       const actions = document.createElement("div");
       actions.className = "job-actions";
 
-      const register = document.createElement("a");
-      register.className = "btn";
-      register.href = "register.html";
-      register.textContent = text("Register / Apply", "रजिस्टर / आवेदन करें");
+      let register;
+
+      if (registeredSkills.has(skill.toLowerCase())) {
+        // Is skill me pehle se registration ho chuka hai
+        register = document.createElement("span");
+        register.className = "btn registered-btn";
+        register.setAttribute("aria-disabled", "true");
+        register.textContent = text(
+          "✅ You have already registered",
+          "✅ आप पहले ही रजिस्टर कर चुके हैं"
+        );
+      } else {
+        register = document.createElement("a");
+        register.className = "btn";
+        register.href = "register.html";
+        register.textContent = text("Register / Apply", "रजिस्टर / आवेदन करें");
+      }
 
       const hire = document.createElement("a");
       hire.className = "btn secondary";
@@ -694,7 +752,7 @@ function renderJobs() {
 
   if (workType) {
     const typeName = currentLanguage === "hi"
-      ? (jobTypes.find(item => item[0] === workType)?.[1] || workType)
+      ? ((jobTypes.find(item => item[0] === workType) || [])[1] || workType)
       : workType;
 
     resultCount.textContent += text(
@@ -746,6 +804,17 @@ document.addEventListener("skillset-language-change", event => {
     languageSelect.value = currentLanguage;
     document.documentElement.lang = currentLanguage;
     updateStaticLanguage();
+    renderJobs();
+  }
+});
+
+// Register page se back aane par ya dusre tab me register karne par update ho jaye
+window.addEventListener("pageshow", event => {
+  if (event.persisted) renderJobs();
+});
+
+window.addEventListener("storage", event => {
+  if (event.key === JOBS_REGISTERED_LIST_KEY || event.key === JOBS_PROFILE_KEY) {
     renderJobs();
   }
 });

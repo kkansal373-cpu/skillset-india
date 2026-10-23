@@ -33,15 +33,16 @@
   <section class="page-title">
     <span class="badge"
       data-en="Join Our Community"
-      data-hi="हमारे समुदाय से जुड़ें">Join Our Community</span>
+      data-hi="हमारे समुदाय से जुड़ें">
+      Join Our Community
+    </span>
 
     <h1 data-en="Create Your Profile" data-hi="अपनी प्रोफ़ाइल बनाएँ">
       Create Your Profile
     </h1>
 
-    <p
-      data-en="Fill in your details. Email is optional."
-      data-hi="अपनी जानकारी भरें। ईमेल देना वैकल्पिक है।">
+    <p data-en="Fill in your details. Email is optional."
+       data-hi="अपनी जानकारी भरें। ईमेल देना वैकल्पिक है।">
       Fill in your details. Email is optional.
     </p>
   </section>
@@ -135,14 +136,13 @@
 
       <div class="field full">
         <button class="btn" type="submit"
-          data-en="Save Demo Profile"
-          data-hi="डेमो प्रोफ़ाइल सेव करें">
-          Save Demo Profile
+          data-en="Register Now"
+          data-hi="अभी रजिस्टर करें">
+          Register Now
         </button>
 
-        <p
-          data-en="Fields marked * are required. Email can be left blank."
-          data-hi="* वाले फ़ील्ड भरना ज़रूरी है। ईमेल खाली छोड़ सकते हैं।">
+        <p data-en="Fields marked * are required. Email can be left blank."
+           data-hi="* वाले फ़ील्ड भरना ज़रूरी है। ईमेल खाली छोड़ सकते हैं।">
           Fields marked * are required. Email can be left blank.
         </p>
 
@@ -151,6 +151,42 @@
 
     </div>
   </form>
+
+  <!-- Profile appears here after registration -->
+  <section class="card" id="profileCard" hidden style="margin-top:24px;">
+    <h2 data-en="My Profile" data-hi="मेरी प्रोफ़ाइल">My Profile</h2>
+
+    <p id="profileSuccess" style="color:green;font-weight:bold;"
+       role="status">
+      Registration Successfully!
+    </p>
+
+    <p><strong data-en="Full Name:" data-hi="पूरा नाम:">Full Name:</strong>
+      <span id="profileName"></span></p>
+
+    <p><strong data-en="Join As:" data-hi="भूमिका:">Join As:</strong>
+      <span id="profileRole"></span></p>
+
+    <p><strong data-en="Email:" data-hi="ईमेल:">Email:</strong>
+      <span id="profileEmail"></span></p>
+
+    <p><strong data-en="Mobile:" data-hi="मोबाइल:">Mobile:</strong>
+      <span id="profileMobile"></span></p>
+
+    <p><strong data-en="City:" data-hi="शहर:">City:</strong>
+      <span id="profileCity"></span></p>
+
+    <p><strong data-en="Main Skill:" data-hi="मुख्य कौशल:">Main Skill:</strong>
+      <span id="profileSkill"></span></p>
+
+    <p><strong data-en="Experience:" data-hi="अनुभव:">Experience:</strong>
+      <span id="profileExperience"></span></p>
+
+    <p><small data-en="Your demo profile is saved in this browser."
+       data-hi="आपकी डेमो प्रोफ़ाइल इसी ब्राउज़र में सेव है।">
+      Your demo profile is saved in this browser.
+    </small></p>
+  </section>
 
   <div class="notice"
     data-en="Demo only: profile details are saved in this browser. Secure login and a shared database are not connected."
@@ -172,36 +208,114 @@
   const otherSkillWrap = document.getElementById("otherSkillWrap");
   const otherSkillInput = document.getElementById("otherSkill");
   const message = document.getElementById("registerMessage");
+  const profileCard = document.getElementById("profileCard");
+  const profileSuccess = document.getElementById("profileSuccess");
 
   const languageKey = "skillset_language";
-  let language = localStorage.getItem(languageKey) || "en";
+  const profileKey = "skillset_demo_profile";
+  const registeredKey = "skillset_registered_skills";
 
+  let language = localStorage.getItem(languageKey) === "hi" ? "hi" : "en";
+
+  /* ---------- Registered skills (browser me save) ---------- */
+  function getRegistered() {
+    try {
+      const list = JSON.parse(localStorage.getItem(registeredKey));
+      return Array.isArray(list) ? list : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveRegistered(list) {
+    localStorage.setItem(registeredKey, JSON.stringify(list));
+  }
+
+  function isRegistered(skill) {
+    const target = String(skill || "").trim().toLowerCase();
+    return getRegistered().some(s => String(s).trim().toLowerCase() === target);
+  }
+
+  function addRegistered(skill) {
+    if (!isRegistered(skill)) {
+      const list = getRegistered();
+      list.push(skill);
+      saveRegistered(list);
+    }
+  }
+
+  /* ---------- Dropdown me "already registered" dikhana ---------- */
+  function applyRegisteredLabels() {
+    const doneText = language === "hi"
+      ? "✅ आप पहले ही रजिस्टर कर चुके हैं"
+      : "✅ You have already registered";
+
+    Array.from(skillSelect.options).forEach(option => {
+      // "Select skill" aur "Other" ko chhod do
+      if (!option.value || option.value === "Other") return;
+
+      const baseText = language === "hi" ? option.dataset.hi : option.dataset.en;
+
+      if (isRegistered(option.value)) {
+        option.textContent = baseText + " — " + doneText;
+        option.disabled = true;
+      } else {
+        option.textContent = baseText;
+        option.disabled = false;
+      }
+    });
+  }
+
+  /* ---------- Language ---------- */
   function translatePage(lang) {
     language = lang === "hi" ? "hi" : "en";
     document.documentElement.lang = language;
     languageSelect.value = language;
 
     document.querySelectorAll("[data-en][data-hi]").forEach(element => {
-      if (element.tagName !== "OPTION") {
-        element.textContent = element.dataset[language];
-      } else {
-        element.textContent = element.dataset[language];
-      }
+      element.textContent = language === "hi"
+        ? element.dataset.hi
+        : element.dataset.en;
     });
 
-    document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]").forEach(input => {
-      input.placeholder = language === "hi"
-        ? input.dataset.placeholderHi
-        : input.dataset.placeholderEn;
-    });
+    document.querySelectorAll("[data-placeholder-en][data-placeholder-hi]")
+      .forEach(input => {
+        input.placeholder = language === "hi"
+          ? input.dataset.placeholderHi
+          : input.dataset.placeholderEn;
+      });
 
-    message.textContent = "";
+    if (profileCard.hidden === false) {
+      profileSuccess.textContent = language === "hi"
+        ? "✅ रजिस्ट्रेशन सफल रहा! आपकी प्रोफ़ाइल सेव हो गई है।"
+        : "✅ Registration Successfully! Your profile has been saved.";
+    }
+
+    applyRegisteredLabels(); // translate ke baad labels dobara lagao
   }
 
   function toggleOtherSkill() {
     const showOther = skillSelect.value === "Other";
     otherSkillWrap.classList.toggle("hidden", !showOther);
     otherSkillInput.required = showOther;
+  }
+
+  function showProfile(profile) {
+    document.getElementById("profileName").textContent = profile.fullName || "";
+    document.getElementById("profileRole").textContent = profile.role || "";
+    document.getElementById("profileEmail").textContent =
+      profile.email || (language === "hi" ? "नहीं दिया गया" : "Not provided");
+    document.getElementById("profileMobile").textContent = profile.mobile || "";
+    document.getElementById("profileCity").textContent = profile.city || "";
+    document.getElementById("profileSkill").textContent = profile.skill || "";
+    document.getElementById("profileExperience").textContent =
+      profile.experience || "";
+
+    profileSuccess.textContent = language === "hi"
+      ? "✅ रजिस्ट्रेशन सफल रहा! आपकी प्रोफ़ाइल सेव हो गई है।"
+      : "✅ Registration Successfully! Your profile has been saved.";
+
+    profileCard.hidden = false;
   }
 
   languageSelect.addEventListener("change", () => {
@@ -211,9 +325,12 @@
 
   skillSelect.addEventListener("change", toggleOtherSkill);
 
+  /* ---------- Form submit ---------- */
   form.addEventListener("submit", event => {
     event.preventDefault();
     message.textContent = "";
+
+    if (!form.reportValidity()) return;
 
     const mobile = document.getElementById("mobile").value.trim();
 
@@ -224,34 +341,76 @@
       return;
     }
 
+    const selectedSkill = skillSelect.value === "Other"
+      ? otherSkillInput.value.trim()
+      : skillSelect.value;
+
+    if (skillSelect.value === "Other" && !selectedSkill) {
+      message.textContent = language === "hi"
+        ? "कृपया अपना कौशल लिखें।"
+        : "Please enter your skill.";
+      return;
+    }
+
+    // Is skill me pehle se registration ho chuka hai to rok do
+    if (isRegistered(selectedSkill)) {
+      message.textContent = language === "hi"
+        ? "आप इस कौशल में पहले ही रजिस्टर कर चुके हैं।"
+        : "You have already registered for this skill.";
+      return;
+    }
+
     const profile = {
       fullName: document.getElementById("fullName").value.trim(),
       role: document.getElementById("role").value,
       email: document.getElementById("email").value.trim(),
       mobile,
       city: document.getElementById("city").value.trim(),
-      skill: skillSelect.value === "Other"
-        ? otherSkillInput.value.trim()
-        : skillSelect.value,
+      skill: selectedSkill,
       experience: document.getElementById("experience").value,
       savedAt: new Date().toISOString()
     };
 
     try {
-      localStorage.setItem("skillset_demo_profile", JSON.stringify(profile));
+      localStorage.setItem(profileKey, JSON.stringify(profile));
+      addRegistered(selectedSkill);
 
       message.textContent = language === "hi"
-        ? "आपकी डेमो प्रोफ़ाइल इस ब्राउज़र में सेव हो गई है!"
-        : "Your demo profile has been saved in this browser!";
+        ? "✅ रजिस्ट्रेशन सफल रहा!"
+        : "✅ Registration Successfully!";
 
-      form.reset();
+      showProfile(profile);
+
+      // Skill ka dropdown reset karo aur nayi label lagao
+      skillSelect.value = "";
+      otherSkillInput.value = "";
       toggleOtherSkill();
+      applyRegisteredLabels();
+
+      profileCard.scrollIntoView({ behavior: "smooth", block: "start" });
+
     } catch (error) {
       message.textContent = language === "hi"
         ? "प्रोफ़ाइल सेव नहीं हो सकी। कृपया ब्राउज़र स्टोरेज की जाँच करें।"
         : "Could not save your profile. Please check browser storage.";
     }
   });
+
+  /* ---------- Page khulne par saved data load karo ---------- */
+  try {
+    const savedProfile = localStorage.getItem(profileKey);
+
+    if (savedProfile) {
+      const profile = JSON.parse(savedProfile);
+
+      // Purani registration (is update se pehle wali) ko bhi list me jodo
+      if (profile.skill) addRegistered(profile.skill);
+
+      showProfile(profile);
+    }
+  } catch (error) {
+    console.error("Could not load the saved demo profile.", error);
+  }
 
   translatePage(language);
   toggleOtherSkill();
